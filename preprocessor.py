@@ -20,4 +20,4 @@ def preprocess_text(text):
 
 if __name__ == '__main__':
     # Test
-    print(preprocess_text('Привет Всем, что вы как бы ну тут делаете?'))
+    print(preprocess_text('Привет Всем, что вы как бы ну \-^-^-/ тут делаете?'))
