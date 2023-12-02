@@ -5,8 +5,12 @@ import logging
 import sys
 import json
 from pathlib import Path
+import csv
+import traceback
 
 import aiohttp
+
+from parsing import parse_response
 
 TOKEN_KEY = 'API_TOKEN'
 PER_MINUT_LIMIT = 10
@@ -40,7 +44,7 @@ class SyncedLoader:
 
         batch_results = [None for i in range(self.request_limit_per_min)]
         current_batch_idx = 0
-        n_batches = round(len(pages) / self.request_limit_per_min)
+        n_batches = round(0.5 + len(pages) / self.request_limit_per_min)
         logging.info(f'Total Number Of Batches To Run {n_batches}')
         failed_pages = []
         async with aiohttp.ClientSession() as session:
@@ -85,19 +89,24 @@ class SyncedLoader:
             logging.info(f'Skipping Flush Of Empty Results To {self.output}')
             return
         try:
-            jsonObject = []
-            logging.info(f'Flushing Batch Results To {self.output}')
-            if Path(self.output).exists():
-                with open(self.output, 'r') as f:
-                    jsonObject = json.load(f)
+            pages_of_persons = [parse_response(page) for page in results]
+            persons = [person for page in pages_of_persons for person in page]
+            if not persons:
+                logging.info('Skipping because no persons to process')
+                return
             
-            assert(isinstance(jsonObject, list))
-            results = jsonObject + results
-            with open(self.output, 'w') as f:
-                logging.info(f'Updating {self.output}')
-                json.dump(results, f)
+            if not Path(self.output).exists():
+                with open(self.output, 'a', newline='') as f:
+                    writer = csv.DictWriter(f, delimiter=',',  lineterminator="\n", fieldnames=list(persons[0].keys()))
+                    writer.writeheader() 
+            
+            with open(self.output, 'a') as f:
+                for person in persons:
+                    f.write(','.join(list(person.values())).strip())
+                    f.write('\n')
         except BaseException as e:
             logging.error(f'Error while trying write to {e}')
+            traceback.print_exc()
 
 if __name__ == '__main__':
     if TOKEN_KEY not in os.environ:

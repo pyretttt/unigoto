@@ -9,14 +9,13 @@ russian_stopwords = stopwords.words("russian")
 punctuations_translation = str.maketrans('', '', punctuation) 
 
 
-def preprocess_text(text):
+def preprocess_text(text, if_empty: str = 'unk'):
     string = text.translate(punctuations_translation) \
         .strip() \
         .lower()
     tokens = [token for token in string.split() if token not in russian_stopwords]
     
-    return ' '.join(tokens)
-
+    return ' '.join(tokens).strip() or if_empty
 
 if __name__ == '__main__':
     # Test
