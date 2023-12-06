@@ -3,6 +3,9 @@ import csv
 from preprocessor import preprocess_text
 
 def parse_response(response) -> list[str]:
+    """
+        parses data from target api
+    """
     if not hasattr(response, 'get'): # If something wrong came
         return []
     
@@ -11,7 +14,7 @@ def parse_response(response) -> list[str]:
     if persons is None: # if response contains errors
         return result
     for person in persons:
-        attributes = dict()
+        attributes = dict() # it is just single level container for further csv cast
         
         if (country := person.get('country')) \
             and (country_name := country.get('title')) \

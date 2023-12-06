@@ -10,6 +10,10 @@ punctuations_translation = str.maketrans('', '', punctuation)
 
 
 def preprocess_text(text, if_empty: str = 'unk'):
+    """
+        Removes stop words and punctuaction,
+        lowers all tokens
+    """
     string = text.translate(punctuations_translation) \
         .strip() \
         .lower()

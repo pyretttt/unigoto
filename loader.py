@@ -34,9 +34,19 @@ class SyncedLoader:
         self.output = output
 
     def request_url(self, page):
+        """
+            Forms URL for request
+        """
         return f'{self.base_url}/api/{page}?token={self.token}'
 
     async def load(self, pages, attempt=0):
+        """
+            Concurrently loads multiple pages from API
+            Procced succesful responses
+            Failed are added to retry buffer
+
+            Each iteration results in flushing loaded pages to csv file
+        """
         if attempt > RETRY_ATTEMPTS:
             logging.error(f'Failed to load {pages} after fifth attempt')
             return
