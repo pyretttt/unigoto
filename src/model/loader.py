@@ -10,7 +10,7 @@ import traceback
 
 import aiohttp
 
-from parsing import parse_response
+from .parsing import parse_response
 
 TOKEN_KEY = 'API_TOKEN'
 PER_MINUT_LIMIT = 10

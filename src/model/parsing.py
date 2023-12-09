@@ -1,6 +1,6 @@
 import csv
 
-from preprocessor import preprocess_text
+from .preprocessor import preprocess_text
 
 def parse_response(response) -> list[str]:
     """
