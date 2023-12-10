@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Red+Hat+Text&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/static/styles.css" />
+        <title>UniGoTo</title>
+    </head>
+    <body>
+        <div class="app-header">
+            <h1>UniGoTo</h1>
+        </div>
+        <main class="app-container">
+            <div class="content">
+                <h2>Анкета</h2>
+                <section class="grid-form">
+                    <label for="#interests"> Интересы:</label>
+                    <textarea id="interests" maxlength="30"></textarea>
+                </section>
+                <h2>Параметры модели</h2>
+                <section class="grid-form">
+                    <label for="model-select">Модель:</label>
+                    <select name="model-select" id="model-select">
+                        <option value="baseline">
+                            Расстояние Левенштайна (Baseline)
+                        </option>
+                    </select>
+
+                    <label for="res-length">Кол-во результатов:</label>
+                    <select name="res-length" id="res-length">
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                    </select>
+                    <button id="start-button" onclick="postBaseline()">
+                        Пуск!
+                    </button>
+                </section>
+                <section class="results">
+                    <h2>Результаты</h2>
+                    <p id="results__info"></p>
+                    <p id="results__error"></p>
+                    <ul id="results_list">
+                    </ul>
+                </section>
+            </div>
+        </main>
+        <script src="/static/app.js"></script>
+    </body>
+</html>
