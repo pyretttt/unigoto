@@ -1,3 +1,5 @@
+![Tests](https://github.com/pyretttt/unigoto/actions/workflows/python-app.yml/badge.svg)
+
 # unigoto
 
 ## Запуск сервера FastAPI
