@@ -77,6 +77,4 @@ websockets==12.0
 yarl==1.9.3
 zipp==3.17.0
 black
-#some-package==1.0.0
-#; sys_platform == 'win32'
-#pywin32==300
+pypiwin32==223;sys_platform == 'Windows'
