@@ -53,7 +53,6 @@ pyparsing==3.1.1
 python-dateutil==2.8.2
 python-dotenv==1.0.0
 pytz==2023.3.post1
-#pywin32==306
 PyYAML==6.0.1
 pyzmq==25.1.1
 rapidfuzz==3.5.2
@@ -78,3 +77,6 @@ websockets==12.0
 yarl==1.9.3
 zipp==3.17.0
 black
+some-package==1.0.0
+; sys_platform == 'win32'
+pywin32==300
