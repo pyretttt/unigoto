@@ -1,3 +1,6 @@
+![Tests](https://github.com/pyretttt/unigoto/actions/workflows/python-app.yml/badge.svg)
+
+# unigoto
 Итоговый проект по дисциплине проектный практикум
 
 # Сервис для подбора вузов по интересам
